@@ -4,7 +4,7 @@ async function getSubs(langCode) {
   return (await (await fetch(url)).json()).events.map(x => ({...x, text: x.segs?.map(x => x.utf8)?.join(" ")?.replace(/\n/g,' ')?.replace(/♪|'|"|\.{2,}|\<[\s\S]*?\>|\{[\s\S]*?\}|\[[\s\S]*?\]/g,'')?.trim() || ''}));
 }
 function speak(text, lang) {
-    let utterance = new SpeechSynthesisUtterance(text);
+    utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang
     utterance.onend = () => utterance = false;
     speechSynthesis.speak(utterance);
