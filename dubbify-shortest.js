@@ -6,12 +6,11 @@ async function getSubs(langCode) {
 function speak(text, lang) {
     let utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang
-    speechSynthesis.speak(utterance);
     utterance.onend = () => utterance = false;
+    speechSynthesis.speak(utterance);
 }
 async function speakCurrentSub() {
-  const vid = document.querySelector('video');
-  const currentIndex = subs.findIndex(x => x.start <= vid.currentTime && x.start + x.dur >= vid.currentTime);
+  const currentIndex = subs.findIndex(x => x.start <= (vid = document.querySelector('video')).currentTime && x.start + x.dur >= vid.currentTime);
   if (currentIndex === -1 || lastIndex === currentIndex) return;
   if (utterance)
     return setTimeout(speakCurrentSub, 100) && vid.pause();
