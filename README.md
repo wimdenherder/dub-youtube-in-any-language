@@ -1,22 +1,41 @@
-# Dub Youtube in any language with 19 lines of code
+# YouTube Video Dubbing with Automatic Voices with 19 lines of code
 ## Usage
 
-- open any YT video
-- copy paste the [code](dubbify.js) in the developer console (option+cmd+j in chrome on mac) 
+- Open a YouTube video in a browser.
+- Open the browser's developer console.
+- Copy and paste the entire script into the console.
+- Press Enter to execute the script.
+- The video should now play with the dubbed voice according to the selected language.
 
-PS: you can change the language in the script `lang = "ru"`. Use languagecode here
+Note 1: you can change the language in the script `lang = "ru"`. Use languagecode here
+Note 2: This script uses the Web Speech API which might not be supported in all browsers. Please ensure that you are using a supported browser, such as Google Chrome or Mozilla Firefox, for the best experience.
 
 # Explanation
 
-  This code snippet is designed to be run on a YouTube video page to enable text-to-speech functionality for video subtitles. It works by fetching the subtitles in a specified language (Dutch, in this case), then using the browser's built-in SpeechSynthesis API to read the subtitles out loud as the video plays. Here's a breakdown of the code:
+## Description 
+This script automatically dubs YouTube videos with synthesized voices using the Web Speech API. It fetches the video's subtitles, and as the video plays, it speaks the subtitles in the selected language.
 
-  1. Initialize variables:lastIndex: The last subtitle index spoken, initially set to -1.lang: The language code for the desired subtitles, set to nl for Dutch.voice: A SpeechSynthesisUtterance object that represents the current subtitle being spoken.subs: An array of subtitle objects, fetched using the getSubs() function.vid: The video element on the YouTube page.ct: Caption tracks from the YouTube video's metadata.
-  2. Define the getSubs() function:
-  This asynchronous function fetches the subtitles for the specified language code. It constructs the URL for fetching the subtitles, fetches the JSON data, processes the subtitles to clean up the text, and returns an array of subtitle objects with start time, duration, and text properties.
-  3. Define the speakCurrentSub() function:
-  This asynchronous function finds the current subtitle based on the video's current time. If it's a new subtitle and there's no ongoing speech synthesis, it creates a new SpeechSynthesisUtterance object, sets the language, and speaks the subtitle text. When the speech synthesis is complete, it sets the voice variable to null.
-  4. Set an interval to run the speakCurrentSub() function every 10 milliseconds:
-  This ensures that the subtitles are checked frequently to see if a new one needs to be spoken.
+## Code Documentation
 
-  When you run this code on a YouTube video page, it fetches the Dutch subtitles for the video and reads them aloud as the video plays.
+*fetchYTData function:*
+- Purpose: Fetches and parses the YouTube video data from the current page.
+- Return: A JSON object containing the initial player response data.
 
+*Variable declarations:*
+- lastIndex: Stores the last subtitle index that was spoken.
+- lang: Language code for the desired dubbing language (default: "ru").
+- voice: Stores the current SpeechSynthesisUtterance instance.
+- vid: Stores the video element from the YouTube page.
+- ct: Stores the caption tracks from the YouTube video.
+- subs: Stores the fetched and processed subtitles for the desired language.
+- baseVolume: Stores the original video volume.
+
+*getSubs function:*
+- Purpose: Fetches and processes the video's subtitles for the given language.
+- Input: langCode (String) - Language code for the desired subtitles.
+- Return: An array of subtitle objects with timestamp and text properties.
+- Purpose: Speaks the current subtitle in the selected language using the Web Speech API.
+- Behavior: Pauses the video if a voice is already speaking, continues playback when the speech has ended, and adjusts the video volume during speech.
+
+*setInterval(speak, 10):*
+- Purpose: Continuously calls the speak function every 10 milliseconds to ensure that the appropriate subtitle is spoken at the correct time.
