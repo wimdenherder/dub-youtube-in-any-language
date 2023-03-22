@@ -34,6 +34,8 @@ This script automatically dubs YouTube videos with synthesized voices using the 
 - Purpose: Fetches and processes the video's subtitles for the given language.
 - Input: langCode (String) - Language code for the desired subtitles.
 - Return: An array of subtitle objects with timestamp and text properties.
+
+*speak function:*
 - Purpose: Speaks the current subtitle in the selected language using the Web Speech API.
 - Behavior: Pauses the video if a voice is already speaking, continues playback when the speech has ended, and adjusts the video volume during speech.
 
