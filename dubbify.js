@@ -1,5 +1,5 @@
 const fetchYTData = async () => { try { return JSON.parse((await (await fetch(window.location.href)).text()).split('ytInitialPlayerResponse = ')[1].split(';var')[0]); } catch (e) {}};
-let lastIndex = -1, lang = "ar", voice, vid = document.querySelector('video'), ct = (ytInitialPlayerResponse || await fetchYTData()).captions.playerCaptionsTracklistRenderer.captionTracks, subs = await getSubs(lang), baseVolume = vid.volume;
+let lastIndex = -1, lang = "ru", voice, vid = document.querySelector('video'), ct = (ytInitialPlayerResponse || await fetchYTData()).captions.playerCaptionsTracklistRenderer.captionTracks, subs = await getSubs(lang), baseVolume = vid.volume;
 async function getSubs(langCode) {
   const findCaptionUrl = x => ct.find(y => y.vssId.indexOf(x) === 0)?.baseUrl;
   const url = (findCaptionUrl("." + langCode) || findCaptionUrl(".") || findCaptionUrl("a." + langCode) || ct[0].baseUrl + "&tlang=" + langCode) + "&fmt=json3"
@@ -13,7 +13,7 @@ async function speak() {
   voice = new SpeechSynthesisUtterance(subs[(lastIndex = currentIndex)].text);
   voice.lang = lang
   voice.onend = () => (vid.volume = baseVolume || 1) && (voice = null);
-  vid.volume = 0.3;
+  vid.volume = 0.1;
   speechSynthesis.speak(voice);
 }
 setInterval(speak, 10);

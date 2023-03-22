@@ -1,10 +1,9 @@
 # Dub Youtube in any language with 19 lines of code
 ## Usage
 
-- open a YT video
+- open any YT video
 - option+cmd+j  (Developer console in Chrome)
 - copy paste the [Code](dubbify.js)
-
 
 # Explanation
 
