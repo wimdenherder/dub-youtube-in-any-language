@@ -5,7 +5,7 @@
 - option+cmd+j  (Developer console in Chrome)
 - copy paste the [Code](dubbify.js)
 
-PS: you can change the language in the script `lang = "fr"`. Use languagecode here
+PS: you can change the language in the script `lang = "ru"`. Use languagecode here
 
 # Explanation
 
