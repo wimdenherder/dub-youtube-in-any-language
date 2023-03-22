@@ -7,7 +7,7 @@
 - Press Enter to execute the script.
 - The video should now play with the dubbed voice according to the selected language.
 
-Note 1: you can change the language in the script `lang = "ru"`. Use languagecode here
+Note 1: you can change the language in the script `lang = "ru"`. Use languagecode here  
 Note 2: This script uses the Web Speech API which might not be supported in all browsers. Please ensure that you are using a supported browser, such as Google Chrome or Mozilla Firefox, for the best experience.
 
 # Explanation
