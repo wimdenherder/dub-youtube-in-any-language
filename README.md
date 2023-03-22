@@ -3,7 +3,7 @@
 
 - open any YT video
 - option+cmd+j  (Developer console in Chrome)
-- copy paste the [Code](dubbify.js)
+- copy paste the [code](dubbify.js) in the developer console
 
 PS: you can change the language in the script `lang = "ru"`. Use languagecode here
 
