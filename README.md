@@ -5,6 +5,8 @@
 - option+cmd+j  (Developer console in Chrome)
 - copy paste the [Code](dubbify.js)
 
+PS: you can change the language in the script `lang = "fr"`. Use languagecode here
+
 # Explanation
 
   This code snippet is designed to be run on a YouTube video page to enable text-to-speech functionality for video subtitles. It works by fetching the subtitles in a specified language (Dutch, in this case), then using the browser's built-in SpeechSynthesis API to read the subtitles out loud as the video plays. Here's a breakdown of the code:
