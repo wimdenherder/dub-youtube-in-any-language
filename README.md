@@ -3,7 +3,8 @@
 
 - open a YT video
 - option+cmd+j  (Developer console in Chrome)
-- copy paste code
+- copy paste the [Code](dubbify.js)
+
 
 # Explanation
 
