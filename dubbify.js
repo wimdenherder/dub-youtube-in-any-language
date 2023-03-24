@@ -9,10 +9,7 @@ const speak = async () => {
   if ([-1,lastIndex].includes(currentIndex)) return;
   if (voice) return setTimeout(speak, 100) && vid.pause();
   vid.play();
-  voice = new SpeechSynthesisUtterance(subs[(lastIndex = currentIndex)].text);
-  voice.lang = lang
-  voice.onend = () => (vid.volume = baseVolume || 1) && (voice = null);
-  vid.volume = 0.1;
+  voice = new SpeechSynthesisUtterance(subs[(lastIndex = currentIndex)].text), voice.lang = lang, voice.onend = () => (vid.volume = baseVolume || 1) && (voice = null), vid.volume = 0.1;
   speechSynthesis.speak(voice);
 }
 setInterval(speak, 50); // every 0,05 sec
