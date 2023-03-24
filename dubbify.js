@@ -1,11 +1,10 @@
-const fetchYTData = async () => { try { return JSON.parse((await (await fetch(window.location.href)).text()).split('ytInitialPlayerResponse = ')[1].split(';var')[0]); } catch (e) {}};
-let lastIndex = -1, lang = "ru", voice, vid = document.querySelector('video'), ct = (ytInitialPlayerResponse || await fetchYTData()).captions.playerCaptionsTracklistRenderer.captionTracks, subs = await getSubs(lang), baseVolume = vid.volume;
+let lastIndex = -1, lang = currentLang = "nl", voice, vid = document.querySelector('video'), subs = await getSubs(lang), baseVolume = vid.volume, currentUrl = location.href;
 async function getSubs(langCode) {
-  const findCaptionUrl = x => ct.find(y => y.vssId.indexOf(x) === 0)?.baseUrl;
-  const url = (findCaptionUrl("." + langCode) || findCaptionUrl(".") || findCaptionUrl("a." + langCode) || ct[0].baseUrl) + "&fmt=json3&tlang=" + langCode;
+  let ct = (ytInitialPlayerResponse || JSON.parse((await (await fetch(window.location.href)).text()).split('ytInitialPlayerResponse = ')[1].split(';var')[0])).captions.playerCaptionsTracklistRenderer.captionTracks, findCaptionUrl = x => ct.find(y => y.vssId.indexOf(x) === 0)?.baseUrl, url = (findCaptionUrl("." + langCode) || findCaptionUrl(".") || findCaptionUrl("a." + langCode) || ct[0].baseUrl) + "&fmt=json3&tlang=" + langCode;
   return (await (await fetch(url)).json()).events.map(x => ({...x, text: x.segs?.map(x => x.utf8)?.join(" ")?.replace(/\n/g,' ')?.replace(/♪|'|"|\.{2,}|\<[\s\S]*?\>|\{[\s\S]*?\}|\[[\s\S]*?\]/g,'')?.trim() || ''}));
 }
 const speak = async () => {
+  if (location.href !== currentUrl || currentLang !== lang) (currentUrl = location.href) && (currentLang = lang) && (subs = await getSubs(lang));
   const currentIndex = subs.findIndex(x => x.text && x.tStartMs <= 1000 * vid.currentTime && x.tStartMs + x.dDurationMs >= 1000 * vid.currentTime);
   if ([-1,lastIndex].includes(currentIndex)) return;
   if (voice) return setTimeout(speak, 100) && vid.pause();
@@ -16,4 +15,4 @@ const speak = async () => {
   vid.volume = 0.1;
   speechSynthesis.speak(voice);
 }
-setInterval(speak, 10);
+setInterval(speak, 50); // every 0,05 sec
