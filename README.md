@@ -1,4 +1,4 @@
-# YouTube Video Dubbing with Automatic Voices with 19 lines of code
+# This 15-Line JavaScript Script Dubs Videos in Any Language - Unbelievable!
 ## Usage
 
 - Open a YouTube video in a browser.
