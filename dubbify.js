@@ -7,9 +7,9 @@ const speak = async () => {
   if (location.href !== currentUrl || currentLang !== lang) (currentUrl = location.href) && (currentLang = lang) && (subs = await getSubs(lang));
   const currentIndex = subs.findIndex(x => x.text && x.tStartMs <= 1000 * vid.currentTime && x.tStartMs + x.dDurationMs >= 1000 * vid.currentTime);
   if ([-1,lastIndex].includes(currentIndex)) return;
-  if (voice) return setTimeout(speak, 100) && vid.pause();
+  if (voice) return vid.pause();
   vid.play();
   voice = new SpeechSynthesisUtterance(subs[(lastIndex = currentIndex)].text), voice.lang = lang, voice.onend = () => (vid.volume = baseVolume || 1) && (voice = null), vid.volume = 0.1;
   speechSynthesis.speak(voice);
 }
-setInterval(speak, 50); // every 0,05 sec
+let dubYouTubeInterval = setInterval(speak, 50); // every 0,05 sec
